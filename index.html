@@ -1,0 +1,1851 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d19">
+<title>CEO MIND | Business Academy</title>
+
+<style>
+:root{
+--bg:#080d19;--panel:#111a2b;--panel2:#162239;
+--gold:#d9ae55;--white:#f5f5f5;--muted:#9caac0;
+--border:#27344b;--green:#42c98b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--white);font-family:Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+width:245px;background:#0b1220;border-right:1px solid var(--border);
+padding:23px 15px;position:fixed;height:100vh;overflow-y:auto;
+}
+.brand{font-size:25px;font-weight:900;color:var(--gold);padding:8px 12px 25px}
+.brand span{color:white}
+.side-label{font-size:10px;color:#77849b;letter-spacing:2px;padding:17px 12px 8px}
+.nav{
+width:100%;display:flex;gap:12px;align-items:center;
+background:none;border:0;color:#b5c1d2;text-align:left;
+padding:12px;border-radius:8px;margin:2px 0;font-size:13px;
+}
+.nav:hover,.nav.active{background:#202c41;color:var(--gold)}
+.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
+.topbar{
+height:70px;border-bottom:1px solid var(--border);
+display:flex;justify-content:space-between;align-items:center;
+padding:0 30px;background:#0b1220;position:sticky;top:0;z-index:5;
+}
+.topbar small{color:var(--muted)}
+.avatar{background:var(--gold);color:#101010;border-radius:50%;padding:10px;font-weight:bold}
+.content{padding:30px;max-width:1450px;margin:auto}
+.page{display:none}
+.page.active{display:block}
+h1{font-size:29px;margin-bottom:8px}
+h2{font-size:21px;margin-bottom:14px}
+h3{font-size:16px;margin-bottom:9px}
+.sub{color:var(--muted);font-size:13px;line-height:1.7}
+.gold{color:var(--gold)}
+.grid{display:grid;gap:17px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+background:var(--panel);border:1px solid var(--border);
+padding:21px;border-radius:12px;min-width:0;
+}
+.card:hover{border-color:#65532f}
+.hero{
+padding:35px;background:linear-gradient(120deg,#19243a,#151c2c);
+border:1px solid #3d3b35;border-radius:15px;margin-bottom:25px;
+}
+.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.2;margin:15px 0}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:650px;color:var(--muted);line-height:1.8}
+.btn{
+background:var(--gold);color:#111;border:0;padding:11px 17px;
+border-radius:7px;font-weight:bold;font-size:13px;margin-top:12px;
+}
+.btn:hover{opacity:.85}
+.btn2{
+background:#202d43;color:var(--white);border:1px solid var(--border);
+padding:10px 15px;border-radius:7px;margin-top:10px;font-size:13px;
+}
+.btn-danger{background:#542d35;color:white}
+.stat-number{font-size:28px;color:var(--gold);font-weight:bold;margin:10px 0}
+.icon{font-size:27px;margin-bottom:12px}
+.progress{height:8px;background:#29364d;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;background:var(--gold);width:0;transition:.3s}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:28px 0 15px;gap:10px}
+input,textarea,select{
+width:100%;background:#0c1423;border:1px solid var(--border);
+padding:12px;color:white;border-radius:7px;margin:7px 0;outline:none;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+textarea{min-height:100px;resize:vertical}
+label{font-size:12px;color:var(--muted)}
+.dept-card{cursor:pointer;transition:.2s}
+.dept-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.dept-card p{font-size:12px;color:var(--muted);margin:8px 0}
+.tag{display:inline-block;color:var(--gold);font-size:11px;background:#302a1d;padding:5px 9px;border-radius:20px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.lesson{padding:15px;border:1px solid var(--border);border-radius:8px;margin:10px 0;cursor:pointer}
+.lesson:hover{border-color:var(--gold)}
+.lesson.done{border-color:var(--green)}
+.option{
+display:block;background:#19263a;border:1px solid var(--border);
+padding:13px;border-radius:8px;margin:10px 0;cursor:pointer;
+}
+.option:hover{border-color:var(--gold)}
+.option input{width:auto;margin-right:9px}
+.result{padding:15px;border-radius:8px;background:#172a28;color:#75e1ad;margin-top:15px}
+.hidden{display:none!important}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:30px}
+.menu-mobile{display:none;background:#18243a;color:white;border:0;padding:9px;border-radius:6px}
+.toast{position:fixed;bottom:20px;right:20px;background:#24344b;padding:14px 20px;border-radius:8px;display:none;z-index:99}
+.bar{display:flex;align-items:center;gap:10px;margin:13px 0}
+.bar span{width:115px;font-size:12px;color:var(--muted)}
+.bar div{height:8px;background:var(--gold);border-radius:10px;flex:1}
+@media(max-width:950px){
+.sidebar{width:205px}.main{margin-left:205px;width:calc(100% - 205px)}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+.sidebar{display:none;z-index:20;width:245px}
+.sidebar.open{display:block}
+.main{margin-left:0;width:100%}
+.topbar{padding:0 15px}
+.menu-mobile{display:block}
+.content{padding:17px}
+.g2,.g3,.g4{grid-template-columns:1fr}
+.hero{padding:23px}
+h1{font-size:25px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+<div class="brand">CEO <span>MIND.</span></div>
+
+<div class="side-label">MAIN MENU</div>
+<button class="nav active" data-page="dashboard">🏠 Dashboard</button>
+<button class="nav" data-page="departments">🏢 Departments</button>
+<button class="nav" data-page="courses">📚 My Courses</button>
+<button class="nav" data-page="lessons">📖 Lessons</button>
+
+<div class="side-label">LEARNING</div>
+<button class="nav" data-page="quiz">📝 Quiz & Tests</button>
+<button class="nav" data-page="missions">🎯 Daily Missions</button>
+<button class="nav" data-page="progress">📈 Learning Progress</button>
+<button class="nav" data-page="achievements">🏆 Achievements</button>
+
+<div class="side-label">BUSINESS TOOLS</div>
+<button class="nav" data-page="simulator">🏭 Business Simulator</button>
+<button class="nav" data-page="mentor">🤖 AI Business Mentor</button>
+<button class="nav" data-page="finance">💰 Finance Lab</button>
+<button class="nav" data-page="decision">🧠 Decision Lab</button>
+<button class="nav" data-page="startup">🚀 Startup Studio</button>
+
+<div class="side-label">ACCOUNT</div>
+<button class="nav" data-page="profile">👤 My Profile</button>
+<button class="nav" data-page="settings">⚙️ Settings</button>
+<button class="nav" onclick="logout()">↪ Logout</button>
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+<div class="row">
+<button class="menu-mobile" onclick="toggleSidebar()">☰</button>
+<div><strong id="pageTitle">Dashboard</strong><br><small>CEO MIND Business Academy</small></div>
+</div>
+<div class="row">
+<span class="sub" id="topName">Guest</span>
+<div class="avatar" id="topAvatar">G</div>
+</div>
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+
+<section class="page active" id="dashboard">
+<div class="hero">
+<span class="tag">WELCOME TO CEO MIND</span>
+<h1>THINK LIKE A CEO.<br><span>BUILD YOUR FUTURE.</span></h1>
+<p>Learn business, develop leadership skills, explore entrepreneurship and build the mindset of a future business leader.</p>
+<button class="btn" onclick="go('departments')">Explore Academy →</button>
+</div>
+
+<div class="grid g4">
+<div class="card"><div class="icon">🏢</div><div class="stat-number">20</div><p class="sub">Business Departments</p></div>
+<div class="card"><div class="icon">📚</div><div class="stat-number" id="statCourses">0</div><p class="sub">Completed Courses</p></div>
+<div class="card"><div class="icon">🎯</div><div class="stat-number" id="statMissions">0</div><p class="sub">Completed Missions</p></div>
+<div class="card"><div class="icon">📈</div><div class="stat-number" id="statProgress">0%</div><p class="sub">Learning Progress</p></div>
+</div>
+
+<div class="section-title"><h2>Continue Learning</h2><button class="btn2" onclick="go('courses')">My Courses →</button></div>
+<div class="grid g2" id="continueCourses"></div>
+
+<div class="section-title"><h2>Explore Business Tools</h2></div>
+<div class="grid g3">
+<div class="card"><div class="icon">🤖</div><h3>AI Business Mentor</h3><p class="sub">Explore business questions.</p><button class="btn2" onclick="go('mentor')">Open Mentor</button></div>
+<div class="card"><div class="icon">💰</div><h3>Finance Lab</h3><p class="sub">Practice business calculations.</p><button class="btn2" onclick="go('finance')">Open Lab</button></div>
+<div class="card"><div class="icon">🚀</div><h3>Startup Studio</h3><p class="sub">Develop a startup concept.</p><button class="btn2" onclick="go('startup')">Open Studio</button></div>
+</div>
+</section>
+
+<!-- DEPARTMENTS -->
+
+<section class="page" id="departments">
+<h1>Business Academy</h1>
+<p class="sub">Explore all 20 business departments.</p>
+<input id="deptSearch" placeholder="Search departments..." oninput="renderDepartments()">
+<div class="grid g3" id="deptGrid" style="margin-top:20px"></div>
+</section>
+
+<!-- COURSE DETAILS -->
+
+<section class="page" id="courseDetail">
+<button class="btn2" onclick="go('departments')">← Back to Departments</button>
+<div class="section-title"><div><span class="tag" id="courseNumber">DEPARTMENT</span><h1 id="courseHeading" style="margin-top:12px"></h1><p class="sub" id="courseDescription"></p></div></div>
+<div class="grid g2">
+<div class="card"><h3>📖 Course Overview</h3><p class="sub" id="courseOverview"></p></div>
+<div class="card"><h3>🎯 Learning Goal</h3><p class="sub">Understand the concepts and apply your knowledge through lessons, quizzes and practical missions.</p></div>
+</div>
+<div class="section-title"><h2>Course Lessons</h2></div>
+<div class="card" id="courseLessons"></div>
+<button class="btn" onclick="startCourse()">Start Course →</button>
+</section>
+
+<!-- MY COURSES -->
+
+<section class="page" id="courses">
+<h1>My Courses</h1>
+<p class="sub">Your enrolled and completed courses.</p>
+<div class="grid g3" id="myCourses" style="margin-top:20px"></div>
+</section>
+
+<!-- LESSONS -->
+
+<section class="page" id="lessons">
+<h1>Business Lessons</h1>
+<p class="sub">Learn business concepts through simple structured lessons.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h3>Choose a Department</h3>
+<select id="lessonDept" onchange="loadLessons()"></select>
+<div id="lessonList"></div>
+</div>
+<div class="card">
+<span class="tag">LESSON CONTENT</span>
+<h2 id="lessonTitle" style="margin-top:15px">Select a Lesson</h2>
+<p class="sub" id="lessonContent">Choose a lesson from the left side to start learning.</p>
+<div id="lessonExample"></div>
+<button class="btn" id="completeLesson" onclick="completeCurrentLesson()" disabled>Mark Lesson Complete ✓</button>
+</div>
+</div>
+</section>
+
+<!-- QUIZ -->
+
+<section class="page" id="quiz">
+<h1>Quiz & Knowledge Tests</h1>
+<p class="sub">Test your understanding of business concepts.</p>
+<div class="card" style="margin-top:20px">
+<select id="quizDept" onchange="prepareQuiz()"></select>
+<div class="row"><h2 id="quizHeading">Business Knowledge Quiz</h2><span class="tag">5 QUESTIONS</span></div>
+<div id="quizQuestions"></div>
+<button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+<div id="quizResult"></div>
+</div>
+</section>
+
+<!-- MISSIONS -->
+
+<section class="page" id="missions">
+<h1>Daily Missions & Exercises</h1>
+<p class="sub">Practice business thinking with practical challenges.</p>
+<div class="grid g2" id="missionGrid" style="margin-top:20px"></div>
+</section>
+
+<!-- PROGRESS -->
+
+<section class="page" id="progress">
+<h1>Learning Progress</h1>
+<p class="sub">Your learning activity and course completion.</p>
+<div class="grid g3" style="margin-top:20px">
+<div class="card"><h3>Overall Progress</h3><div class="stat-number" id="overallProgress">0%</div><div class="progress"><div id="overallBar"></div></div></div>
+<div class="card"><h3>Lessons Completed</h3><div class="stat-number" id="lessonCount">0</div></div>
+<div class="card"><h3>Quiz Attempts</h3><div class="stat-number" id="quizCount">0</div></div>
+</div>
+<div class="section-title"><h2>Department Progress</h2></div>
+<div class="card" id="progressList"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+
+<section class="page" id="achievements">
+<h1>Achievements & Rewards</h1>
+<p class="sub">Milestones you can unlock through learning.</p>
+<div class="grid g3" id="badges" style="margin-top:20px"></div>
+</section>
+
+<!-- SIMULATOR -->
+
+<section class="page" id="simulator">
+<h1>Business Simulator</h1>
+<p class="sub">Practice making business decisions in a fictional business environment.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">SIMULATION ONLY</span>
+<h2 style="margin-top:15px">🏪 Mini Business Simulator</h2>
+<p class="sub">Manage a fictional shop and calculate its estimated monthly results.</p>
+<label>Monthly Sales (₹)</label><input type="number" id="simSales" value="50000">
+<label>Monthly Expenses (₹)</label><input type="number" id="simExpenses" value="30000">
+<label>Marketing Budget (₹)</label><input type="number" id="simMarketing" value="5000">
+<button class="btn" onclick="simulate()">Run Simulation</button>
+<div id="simResult" class="result hidden"></div>
+</div>
+</section>
+
+<!-- AI MENTOR -->
+
+<section class="page" id="mentor">
+<h1>AI Business Mentor</h1>
+<p class="sub">Business learning assistant interface.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">MENTOR DEMO</span>
+<h2 style="margin-top:15px">🤖 Ask Your Business Mentor</h2>
+<div id="chat" style="min-height:150px;max-height:350px;overflow:auto;background:#0c1423;padding:15px;border-radius:8px;margin:15px 0">
+<p class="sub">Mentor: Welcome! Ask me about business ideas, marketing, finance, startups or leadership.</p>
+</div>
+<textarea id="mentorQuestion" placeholder="Ask a business question..."></textarea>
+<button class="btn" onclick="askMentor()">Send Message →</button>
+<p class="sub" style="margin-top:12px">This is a demonstration interface with sample responses, not a connected live AI service.</p>
+</div>
+</section>
+
+<!-- FINANCE LAB -->
+
+<section class="page" id="finance">
+<h1>Finance Lab</h1>
+<p class="sub">Practice financial calculations using fictional business figures.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h2>💰 Profit Calculator</h2>
+<label>Total Revenue (₹)</label><input id="revenue" type="number" value="100000">
+<label>Total Costs (₹)</label><input id="costs" type="number" value="65000">
+<button class="btn" onclick="calculateProfit()">Calculate Profit</button>
+<div id="profitResult" class="result hidden"></div>
+</div>
+<div class="card">
+<h2>📊 Break-even Calculator</h2>
+<label>Fixed Costs (₹)</label><input id="fixed" type="number" value="20000">
+<label>Selling Price per Unit (₹)</label><input id="price" type="number" value="100">
+<label>Variable Cost per Unit (₹)</label><input id="variable" type="number" value="60">
+<button class="btn" onclick="calculateBreakEven()">Calculate Break-even</button>
+<div id="breakResult" class="result hidden"></div>
+</div>
+</div>
+</section>
+
+<!-- DECISION LAB -->
+
+<section class="page" id="decision">
+<h1>Decision Lab</h1>
+<p class="sub">Learn how to evaluate business decisions.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">BUSINESS SCENARIO</span>
+<h2 style="margin-top:15px">Your business has a limited marketing budget.</h2>
+<p class="sub">You have ₹10,000 to invest. What would you do first?</p>
+<div id="decisionOptions">
+<label class="option"><input type="radio" name="decision" value="research"> Research your target customers first.</label>
+<label class="option"><input type="radio" name="decision" value="ads"> Spend everything on advertisements immediately.</label>
+<label class="option"><input type="radio" name="decision" value="random"> Spend without planning.</label>
+</div>
+<button class="btn" onclick="checkDecision()">Evaluate Decision</button>
+<div id="decisionResult" class="result hidden"></div>
+</div>
+</section>
+
+<!-- STARTUP STUDIO -->
+
+<section class="page" id="startup">
+<h1>Startup Studio</h1>
+<p class="sub">Create and organize your startup concept.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h2>🚀 Startup Idea Builder</h2>
+<label>Startup Name</label><input id="startupName" placeholder="Enter startup name">
+<label>Problem You Want to Solve</label><textarea id="startupProblem" placeholder="Describe the problem..."></textarea>
+<label>Your Solution</label><textarea id="startupSolution" placeholder="Describe your solution..."></textarea>
+<label>Target Customers</label><input id="startupCustomers" placeholder="Who are your customers?">
+<label>Business Model</label>
+<select id="startupModel"><option>Subscription</option><option>Product Sales</option><option>Service Business</option><option>Freemium</option><option>Marketplace</option></select>
+<button class="btn" onclick="saveStartup()">Save Startup Concept</button>
+</div>
+<div class="card">
+<h2>📋 Your Startup Plan</h2>
+<div id="startupOutput"><p class="sub">Your saved startup concept will appear here.</p></div>
+</div>
+</div>
+</section>
+
+<!-- PROFILE -->
+
+<section class="page" id="profile">
+<h1>My Profile</h1>
+<p class="sub">Manage your learning identity.</p>
+<div class="card" style="max-width:600px;margin-top:20px">
+<div class="avatar" style="display:inline-block;font-size:25px" id="profileAvatar">G</div>
+<h2 id="profileName" style="margin-top:15px">Guest User</h2>
+<p class="sub" id="profileEmail"></p>
+<label>Full Name</label><input id="editName">
+<label>Email</label><input id="editEmail">
+<button class="btn" onclick="saveProfile()">Save Profile</button>
+</div>
+</section>
+
+<!-- SETTINGS -->
+
+<section class="page" id="settings">
+<h1>Settings</h1>
+<p class="sub">Manage your demo account preferences.</p>
+<div class="card" style="max-width:600px;margin-top:20px">
+<h3>Account</h3>
+<p class="sub">CEO MIND browser-based demonstration account.</p>
+<button class="btn2" onclick="exportData()">Export My Learning Data</button>
+<button class="btn2 btn-danger" onclick="resetData()">Reset Learning Data</button>
+</div>
+</section>
+
+<footer>CEO MIND © 2026 | LEARN BUSINESS. THINK BIG. BUILD THE FUTURE.</footer>
+
+</div>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN MODAL -->
+
+<div id="authModal" style="display:none;position:fixed;inset:0;background:#050a14;z-index:100;align-items:center;justify-content:center;padding:20px">
+<div class="card" style="max-width:400px;width:100%">
+<div class="brand" style="padding-left:0">CEO <span>MIND.</span></div>
+<h2 id="authHeading">Welcome Back</h2>
+<p class="sub">Access your business learning dashboard.</p>
+<div id="authNameWrap" class="hidden"><label>Full Name</label><input id="authName" placeholder="Your name"></div>
+<label>Email</label><input id="authEmail" type="email" placeholder="Email address">
+<label>Password</label><input id="authPassword" type="password" placeholder="Password">
+<button class="btn" style="width:100%" onclick="authenticate()">Continue →</button>
+<button class="btn2" style="width:100%" onclick="toggleAuth()">Switch Login / Signup</button>
+<button class="btn2" style="width:100%" onclick="guestLogin()">Explore Demo as Guest</button>
+<p class="sub" style="margin-top:15px">Demo authentication only. Do not enter a real password.</p>
+</div>
+</div>
+
+<script>
+
+/* CEO MIND APPLICATION DATA */
+
+const departments=[
+["Business Fundamentals","📘","Learn business foundations and core concepts."],
+["Business Ideas","💡","Discover and develop business opportunities."],
+["Market Research","🔍","Understand customers, competitors and markets."],
+["Business Planning","📝","Create structured business plans."],
+["Startup Building","🚀","Learn how to build a startup."],
+["Marketing","📢","Understand marketing and promotion."],
+["Sales","🤝","Learn customer relationships and selling."],
+["Branding","🎨","Build a memorable business identity."],
+["Finance","💰","Understand financial management."],
+["Accounting","🧮","Learn accounts and financial records."],
+["Management","⚙️","Manage teams and business operations."],
+["Leadership","👑","Develop leadership skills."],
+["Communication","🗣️","Improve professional communication."],
+["Negotiation","🤝","Learn negotiation techniques."],
+["Entrepreneurship","🌍","Develop entrepreneurial thinking."],
+["Technology in Business","💻","Explore modern business technology."],
+["AI in Business","🤖","Understand AI applications in business."],
+["E-commerce","🛒","Learn online business fundamentals."],
+["Business Law","⚖️","Understand basic business legal concepts."],
+["Business Growth and Scaling","📈","Learn how businesses expand."]
+];
+
+const lessonTopics=[
+"Introduction and Basic Concepts",
+"Important Principles",
+"Real-World Business Example",
+"Planning and Strategy",
+"Practical Application"
+];
+
+const lessonTexts=[
+"Understand what this topic means and why it matters in business. Learn the basic vocabulary and identify its role in a company.",
+"Explore the important principles behind this topic. Think about how a business can use these principles to solve problems and create value.",
+"Imagine a small business facing a real customer problem. Study how the business can apply this topic to make a better decision.",
+"Create a simple plan. Identify your goal, available resources, possible challenges and the next steps.",
+"Apply what you have learned to a fictional business situation. Write down your approach and explain why it makes sense."
+];
+
+const quizQuestions=[
+["What is the main purpose of a business?",["Create customer value","Avoid customers","Spend without planning"],0],
+["What should come before launching a product?",["Ignore the market","Understand customer needs","Copy everything"],1],
+["What is revenue?",["Business income from sales","Only business expenses","A company logo"],0],
+["What does marketing help a business do?",["Hide its product","Reach potential customers","Remove all costs"],1],
+["What is a business plan?",["A structured business roadmap","A random idea","A product advertisement"],0]
+];
+
+const missions=[
+["Identify a Problem","Find one everyday problem that a business could solve."],
+["Create a Business Idea","Develop a simple idea that solves a customer problem."],
+["Understand Customers","Describe the target customers of your idea."],
+["Competitor Research","Identify two fictional competitors and compare their offers."],
+["Build an Offer","Create a product or service offer."],
+["Create a Brand","Choose a business name and write a tagline."],
+["Marketing Strategy","Write three ways to introduce a product to customers."],
+["Sales Practice","Explain how you would communicate product value."],
+["Finance Practice","Calculate estimated revenue and expenses."],
+["Leadership Challenge","Describe how you would organize a small team."]
+];
+
+/* LOCAL DEMO STORAGE */
+
+function getData(){
+try{return JSON.parse(localStorage.getItem("ceomind_data"))||{}}
+catch(e){return {}}
+}
+let data=getData();
+
+function saveData(){
+localStorage.setItem("ceomind_data",JSON.stringify(data));
+updateDashboard();
+}
+
+function defaults(){
+data.lessons=data.lessons||[];
+data.missions=data.missions||[];
+data.completed=data.completed||[];
+data.quizzes=data.quizzes||[];
+data.profile=data.profile||{name:"Guest User",email:""};
+data.startup=data.startup||null;
+}
+defaults();
+
+/* NAVIGATION */
+
+function go(page){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+const target=document.getElementById(page);
+if(!target)return;
+target.classList.add("active");
+document.querySelectorAll(".nav").forEach(n=>n.classList.toggle("active",n.dataset.page===page));
+document.getElementById("pageTitle").textContent=page==="courseDetail"?"Course Details":page.charAt(0).toUpperCase()+page.slice(1);
+document.getElementById("sidebar").classList.remove("open");
+if(page==="progress")renderProgress();
+if(page==="achievements")renderBadges();
+if(page==="courses")renderMyCourses();
+window.scrollTo(0,0);
+}
+
+document.querySelectorAll(".nav[data-page]").forEach(n=>{
+n.addEventListener("click",()=>go(n.dataset.page));
+});
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("open");
+}
+
+function notify(msg){
+const t=document.getElementById("toast");
+t.textContent=msg;t.style.display="block";
+setTimeout(()=>t.style.display="none",2500);
+}
+
+/* AUTHENTICATION DEMO */
+
+let signupMode=false;
+
+function toggleAuth(){
+signupMode=!signupMode;
+document.getElementById("authHeading").textContent=signupMode?"Create Account":"Welcome Back";
+document.getElementById("authNameWrap").classList.toggle("hidden",!signupMode);
+}
+
+function guestLogin(){
+data.profile={name:"Guest User",email:""};
+saveData();
+document.getElementById("authModal").style.display="none";
+refreshProfile();
+}
+
+function authenticate(){
+const email=document.getElementById("authEmail").value.trim();
+const password=document.getElementById("authPassword").value;
+const name=document.getElementById("authName").value.trim();
+
+if(!email||!password){notify("Enter email and password");return}
+if(signupMode&&!name){notify("Enter your name");return}
+
+data.profile={name:signupMode?name:(data.profile.name||email.split("@")[0]),email:email};
+saveData();
+document.getElementById("authModal").style.display="none";
+refreshProfile();
+notify("Demo account opened!");
+}
+
+function logout(){
+document.getElementById("authModal").style.display="flex";
+}
+
+function refreshProfile(){
+const p=data.profile;
+document.getElementById("topName").textContent=p.name;
+document.getElementById("topAvatar").textContent=p.name.charAt(0).toUpperCase();
+document.getElementById("profileAvatar").textContent=p.name.charAt(0).toUpperCase();
+document.getElementById("profileName").textContent=p.name;
+document.getElementById("profileEmail").textContent=p.email||"Guest account";
+document.getElementById("editName").value=p.name;
+document.getElementById("editEmail").value=p.email;
+}
+
+/* DEPARTMENTS */
+
+function renderDepartments(){
+const q=(document.getElementById("deptSearch")?.value||"").toLowerCase();
+const grid=document.getElementById("deptGrid");
+grid.innerHTML="";
+departments.forEach((d,i)=>{
+if(!d[0].toLowerCase().includes(q))return;
+const el=document.createElement("div");
+el.className="card dept-card";
+el.innerHTML=`<span class="tag">DEPARTMENT ${String(i+1).padStart(2,"0")}</span>
+<div class="icon" style="margin-top:15px">${d[1]}</div>
+<h3>${d[0]}</h3><p>${d[2]}</p><button class="btn2">Explore Course →</button>`;
+el.onclick=()=>openDepartment(i);
+grid.appendChild(el);
+});
+}
+
+let currentDept=0,currentLesson=0;
+
+function openDepartment(i){
+currentDept=i;
+const d=departments[i];
+document.getElementById("courseNumber").textContent="DEPARTMENT "+String(i+1).padStart(2,"0");
+document.getElementById("courseHeading").textContent=d[0];
+document.getElementById("courseDescription").textContent=d[2];
+document.getElementById("courseOverview").textContent="This course introduces "+d[0]+". You will explore five learning topics, review examples and complete practical activities.";
+const list=document.getElementById("courseLessons");
+list.innerHTML=lessonTopics.map((t,j)=>`<div class="lesson" onclick="selectLesson(${i},${j})">${j+1}. ${t}</div>`).join("");
+go("courseDetail");
+}
+
+function startCourse(){
+selectLesson(currentDept,0);
+go("lessons");
+}
+
+function initSelects(){
+["lessonDept","quizDept"].forEach(id=>{
+const s=document.getElementById(id);
+s.innerHTML=departments.map((d,i)=>`<option value="${i}">${d[0]}</option>`).join("");
+});
+}
+
+/* LESSON SYSTEM */
+
+function loadLessons(){
+currentDept=Number(document.getElementById("lessonDept").value);
+const list=document.getElementById("lessonList");
+list.innerHTML=lessonTopics.map((t,i)=>{
+const done=data.lessons.includes(currentDept+"-"+i);
+return `<div class="lesson ${done?"done":""}" onclick="selectLesson(${currentDept},${i})">
+${done?"✓":"📖"} ${i+1}. ${t}</div>`;
+}).join("");
+}
+
+function selectLesson(dept,index){
+currentDept=dept;currentLesson=index;
+document.getElementById("lessonDept").value=dept;
+loadLessons();
+document.getElementById("lessonTitle").textContent=departments[dept][0]+" — "+lessonTopics[index];
+document.getElementById("lessonContent").textContent=lessonTexts[index];
+document.getElementById("lessonExample").innerHTML="<br><div class='tag'>PRACTICAL EXAMPLE</div><p class='sub' style='margin-top:10px'>Imagine a small business applying "+departments[dept][0].toLowerCase()+" to improve its work and serve customers better. Think about the steps it could take.</p>";
+document.getElementById("completeLesson").disabled=data.lessons.includes(dept+"-"+index);
+}
+
+function completeCurrentLesson(){
+const key=currentDept+"-"+currentLesson;
+if(!data.lessons.includes(key))data.lessons.push(key);
+saveData();loadLessons();
+document.getElementById("completeLesson").disabled=true;
+notify("Lesson marked complete!");
+}
+
+/* QUIZ SYSTEM */
+
+function prepareQuiz(){
+const i=Number(document.getElementById("quizDept").value);
+document.getElementById("quizHeading").textContent=departments[i][0]+" Quiz";
+document.getElementById("quizQuestions").innerHTML=quizQuestions.map((q,j)=>`
+<div style="margin:20px 0">
+<strong>${j+1}. ${q[0]}</strong>
+${q[1].map((a,k)=>`<label class="option"><input type="radio" name="q${j}" value="${k}">${a}</label>`).join("")}
+</div>`).join("");
+document.getElementById("quizResult").innerHTML="";
+}
+
+function submitQuiz(){
+let score=0,answered=0;
+quizQuestions.forEach((q,i)=>{
+const a=document.querySelector(`input[name="q${i}"]:checked`);
+if(a){answered++;if(Number(a.value)===q[2])score++}
+});
+if(answered<5){notify("Answer all five questions first");return}
+data.quizzes.push({dept:Number(document.getElementById("quizDept").value),score:score,date:new Date().toLocaleDateString()});
+saveData();
+document.getElementById("quizResult").innerHTML=`<div class="result">Your score: ${score}/5 (${score*20}%). ${score>=3?"Good work!":"Keep learning and try again."}</div>`;
+}
+
+/* MISSIONS */
+
+function renderMissions(){
+document.getElementById("missionGrid").innerHTML=missions.map((m,i)=>{
+const done=data.missions.includes(i);
+return `<div class="card">
+<span class="tag">MISSION ${String(i+1).padStart(2,"0")}</span>
+<h3 style="margin-top:15px">${m[0]}</h3>
+<p class="sub">${m[1]}</p>
+<label>Your Answer / Notes</label>
+<textarea id="missionAnswer${i}" placeholder="Write your answer here..." ${done?"disabled":""}></textarea>
+<button class="btn ${done?"btn2":""}" onclick="completeMission(${i})" ${done?"disabled":""}>${done?"✓ Completed":"Submit Mission"}</button>
+</div>`;
+}).join("");
+}
+
+function completeMission(i){
+const answer=document.getElementById("missionAnswer"+i).value.trim();
+if(!answer){notify("Write your answer first");return}
+data.missions.push(i);
+data["missionAnswer"+i]=answer;
+saveData();renderMissions();notify("Mission completed!");
+}
+
+/* PROGRESS */
+
+function getProgress(){
+return Math.round(((data.lessons.length)/(departments.length*lessonTopics.length))*100);
+}
+
+function updateDashboard(){
+document.getElementById("statCourses").textContent=data.completed.length;
+document.getElementById("statMissions").textContent=data.missions.length;
+document.getElementById("statProgress").textContent=getProgress()+"%";
+document.getElementById("continueCourses").innerHTML=departments.slice(0,4).map((d,i)=>{
+const count=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="card"><h3>${d[1]} ${d[0]}</h3><p class="sub">${count}/5 lessons completed</p><div class="progress"><div style="width:${count*20}%"></div></div><button class="btn2" onclick="openDepartment(${i})">Continue →</button></div>`;
+}).join("");
+}
+
+function renderMyCourses(){
+document.getElementById("myCourses").innerHTML=departments.map((d,i)=>{
+const count=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="card"><h3>${d[1]} ${d[0]}</h3><p class="sub">${count}/5 lessons completed</p><div class="progress"><div style="width:${count*20}%"></div></div><button class="btn2" onclick="openDepartment(${i})">Open Course →</button></div>`;
+}).join("");
+}
+
+function renderProgress(){
+const progress=getProgress();
+document.getElementById("overallProgress").textContent=progress+"%";
+document.getElementById("overallBar").style.width=progress+"%";
+document.getElementById("lessonCount").textContent=data.lessons.length;
+document.getElementById("quizCount").textContent=data.quizzes.length;
+document.getElementById("progressList").innerHTML=departments.map((d,i)=>{
+const n=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="bar"><span>${d[0]}</span><div style="max-width:${Math.max(n*20,1)}%;width:${n*20}%"></div><small>${n}/5</small></div>`;
+}).join("");
+}
+
+/* ACHIEVEMENTS */
+
+function renderBadges(){
+const items=[
+["🌱","First Steps",data.lessons.length>=1,"Complete your first lesson."],
+["📚","Knowledge Seeker",data.lessons.length>=5,"Complete five lessons."],
+["🎯","Mission Starter",data.missions.length>=1,"Complete a mission."],
+["🏅","Mission Master",data.missions.length>=5,"Complete five missions."],
+["🧠","Quiz Explorer",data.quizzes.length>=1,"Attempt a knowledge quiz."],
+["👑","Future CEO",getProgress()===100,"Complete all 100 lessons."]
+];
+document.getElementById("badges").innerHTML=items.map(b=>`<div class="card"><div class="icon">${b[0]}</div><h3>${b[1]} ${b[2]?"✓":"🔒"}</h3><p class="sub">${b[3]}</p><span class="tag">${b[2]?"UNLOCKED":"LOCKED"}</span></div>`).join("");
+}
+
+/* BUSINESS SIMULATOR */
+
+function simulate(){
+const s=Number(document.getElementById("simSales").value);
+const e=Number(document.getElementById("simExpenses").value);
+const m=Number(document.getElementById("simMarketing").value);
+const profit=s-e-m;
+const r=document.getElementById("simResult");
+r.classList.remove("hidden");
+r.innerHTML=`Estimated monthly result: <strong>₹${profit.toLocaleString("en-IN")}</strong><br>${profit>=0?"The fictional business has a positive result.":"The fictional business has a negative result."}<br><small>This is a simplified educational simulation.</small>`;
+}
+
+/* AI MENTOR DEMO */
+
+function askMentor(){
+const q=document.getElementById("mentorQuestion").value.trim();
+if(!q)return;
+const chat=document.getElementById("chat");
+const user=document.createElement("p");
+user.style.margin="12px 0";
+user.textContent="You: "+q;
+chat.appendChild(user);
+const lower=q.toLowerCase();
+let answer="Start by understanding the problem, your customers and the value your business can provide. Create a simple plan and test your idea with feedback.";
+if(lower.includes("market"))answer="Market research helps you understand customer needs, competitors and demand. Start by identifying your target audience and asking what problems they face.";
+else if(lower.includes("profit")||lower.includes("finance"))answer="Profit is calculated by subtracting total costs from total revenue. Track expenses carefully and understand your cash flow.";
+else if(lower.includes("startup")||lower.includes("idea"))answer="A startup begins with a problem worth solving. Identify customers, create a simple solution, test demand and improve using feedback.";
+else if(lower.includes("marketing"))answer="Marketing is about reaching the right customers with the right message. Understand your audience, communicate your value and measure results.";
+else if(lower.includes("leadership"))answer="Good leadership involves communication, responsibility, clear goals and helping a team work together.";
+const reply=document.createElement("p");
+reply.style.cssText="padding:13px;background:#202d43;border-radius:8px;margin:12px 0;color:#e9d09a";
+reply.textContent="Mentor Demo: "+answer;
+chat.appendChild(reply);
+document.getElementById("mentorQuestion").value="";
+chat.scrollTop=chat.scrollHeight;
+}
+
+/* FINANCE LAB */
+
+function calculateProfit(){
+const r=Number(document.getElementById("revenue").value);
+const c=Number(document.getElementById("costs").value);
+const el=document.getElementById("profitResult");
+el.classList.remove("hidden");
+el.innerHTML=`Revenue: ₹${r.toLocaleString("en-IN")}<br>Costs: ₹${c.toLocaleString("en-IN")}<br><strong>Profit / Loss: ₹${(r-c).toLocaleString("en-IN")}</strong>`;
+}
+
+function calculateBreakEven(){
+const f=Number(document.getElementById("fixed").value);
+const p=Number(document.getElementById("price").value);
+const v=Number(document.getElementById("variable").value);
+const el=document.getElementById("breakResult");
+el.classList.remove("hidden");
+if(p<=v){el.textContent="Selling price must be greater than variable cost.";return}
+el.innerHTML=`Contribution per unit: ₹${p-v}<br><strong>Break-even units: ${Math.ceil(f/(p-v))}</strong>`;
+}
+
+/* DECISION LAB */
+
+function checkDecision(){
+const choice=document.querySelector('input[name="decision"]:checked');
+if(!choice){notify("Select an option");return}
+const el=document.getElementById("decisionResult");
+el.classList.remove("hidden");
+el.textContent=choice.value==="research"?"Excellent choice! Understanding customers before spending helps businesses make informed marketing decisions.":"Think again. A business should understand its customers and objectives before spending its marketing budget.";
+}
+
+/* STARTUP STUDIO */
+
+function saveStartup(){
+const name=document.getElementById("startupName").value.trim();
+const problem=document.getElementById("startupProblem").value.trim();
+const solution=document.getElementById("startupSolution").value.trim();
+const customers=document.getElementById("startupCustomers").value.trim();
+const model=document.getElementById("startupModel").value;
+if(!name||!problem||!solution||!customers){notify("Complete all startup fields");return}
+data.startup={name,problem,solution,customers,model};
+saveData();renderStartup();notify("Startup concept saved!");
+}
+
+function renderStartup(){
+const s=data.startup;
+if(!s)return;
+document.getElementById("startupOutput").innerHTML=`
+<h2 class="gold">${escapeHTML(s.name)}</h2>
+<p class="sub"><strong>Problem:</strong> ${escapeHTML(s.problem)}</p><br>
+<p class="sub"><strong>Solution:</strong> ${escapeHTML(s.solution)}</p><br>
+<p class="sub"><strong>Customers:</strong> ${escapeHTML(s.customers)}</p><br>
+<p class="sub"><strong>Model:</strong> ${escapeHTML(s.model)}</p>`;
+}
+
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* PROFILE AND SETTINGS */
+
+function saveProfile(){
+data.profile.name=document.getElementById("editName").value.trim()||"Guest User";
+data.profile.email=document.getElementById("editEmail").value.trim();
+saveData();refreshProfile();notify("Profile updated!");
+}
+
+function exportData(){
+const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="CEO-MIND-Learning-Data.json";
+a.click();URL.revokeObjectURL(a.href);
+}
+
+function resetData(){
+if(!confirm("Reset all locally saved learning data?"))return;
+localStorage.removeItem("ceomind_data");
+data={};defaults();saveData();
+refreshProfile();renderMissions();renderStartup();renderBadges();
+notify("Demo learning data reset");
+}
+
+/* INITIALIZE */
+
+renderDepartments();
+initSelects();
+loadLessons();
+prepareQuiz();
+renderMissions();
+refreshProfile();
+updateDashboard();
+renderStartup();
+
+</script>
+</body>
+</html>
+Samsung Keyboard likho.
+Storage kholo.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d19">
+<title>CEO MIND | Business Academy</title>
+
+<style>
+:root{
+--bg:#080d19;--panel:#111a2b;--panel2:#162239;
+--gold:#d9ae55;--white:#f5f5f5;--muted:#9caac0;
+--border:#27344b;--green:#42c98b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--white);font-family:Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+width:245px;background:#0b1220;border-right:1px solid var(--border);
+padding:23px 15px;position:fixed;height:100vh;overflow-y:auto;
+}
+.brand{font-size:25px;font-weight:900;color:var(--gold);padding:8px 12px 25px}
+.brand span{color:white}
+.side-label{font-size:10px;color:#77849b;letter-spacing:2px;padding:17px 12px 8px}
+.nav{
+width:100%;display:flex;gap:12px;align-items:center;
+background:none;border:0;color:#b5c1d2;text-align:left;
+padding:12px;border-radius:8px;margin:2px 0;font-size:13px;
+}
+.nav:hover,.nav.active{background:#202c41;color:var(--gold)}
+.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
+.topbar{
+height:70px;border-bottom:1px solid var(--border);
+display:flex;justify-content:space-between;align-items:center;
+padding:0 30px;background:#0b1220;position:sticky;top:0;z-index:5;
+}
+.topbar small{color:var(--muted)}
+.avatar{background:var(--gold);color:#101010;border-radius:50%;padding:10px;font-weight:bold}
+.content{padding:30px;max-width:1450px;margin:auto}
+.page{display:none}
+.page.active{display:block}
+h1{font-size:29px;margin-bottom:8px}
+h2{font-size:21px;margin-bottom:14px}
+h3{font-size:16px;margin-bottom:9px}
+.sub{color:var(--muted);font-size:13px;line-height:1.7}
+.gold{color:var(--gold)}
+.grid{display:grid;gap:17px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+background:var(--panel);border:1px solid var(--border);
+padding:21px;border-radius:12px;min-width:0;
+}
+.card:hover{border-color:#65532f}
+.hero{
+padding:35px;background:linear-gradient(120deg,#19243a,#151c2c);
+border:1px solid #3d3b35;border-radius:15px;margin-bottom:25px;
+}
+.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.2;margin:15px 0}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:650px;color:var(--muted);line-height:1.8}
+.btn{
+background:var(--gold);color:#111;border:0;padding:11px 17px;
+border-radius:7px;font-weight:bold;font-size:13px;margin-top:12px;
+}
+.btn:hover{opacity:.85}
+.btn2{
+background:#202d43;color:var(--white);border:1px solid var(--border);
+padding:10px 15px;border-radius:7px;margin-top:10px;font-size:13px;
+}
+.btn-danger{background:#542d35;color:white}
+.stat-number{font-size:28px;color:var(--gold);font-weight:bold;margin:10px 0}
+.icon{font-size:27px;margin-bottom:12px}
+.progress{height:8px;background:#29364d;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;background:var(--gold);width:0;transition:.3s}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:28px 0 15px;gap:10px}
+input,textarea,select{
+width:100%;background:#0c1423;border:1px solid var(--border);
+padding:12px;color:white;border-radius:7px;margin:7px 0;outline:none;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+textarea{min-height:100px;resize:vertical}
+label{font-size:12px;color:var(--muted)}
+.dept-card{cursor:pointer;transition:.2s}
+.dept-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.dept-card p{font-size:12px;color:var(--muted);margin:8px 0}
+.tag{display:inline-block;color:var(--gold);font-size:11px;background:#302a1d;padding:5px 9px;border-radius:20px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.lesson{padding:15px;border:1px solid var(--border);border-radius:8px;margin:10px 0;cursor:pointer}
+.lesson:hover{border-color:var(--gold)}
+.lesson.done{border-color:var(--green)}
+.option{
+display:block;background:#19263a;border:1px solid var(--border);
+padding:13px;border-radius:8px;margin:10px 0;cursor:pointer;
+}
+.option:hover{border-color:var(--gold)}
+.option input{width:auto;margin-right:9px}
+.result{padding:15px;border-radius:8px;background:#172a28;color:#75e1ad;margin-top:15px}
+.hidden{display:none!important}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:30px}
+.menu-mobile{display:none;background:#18243a;color:white;border:0;padding:9px;border-radius:6px}
+.toast{position:fixed;bottom:20px;right:20px;background:#24344b;padding:14px 20px;border-radius:8px;display:none;z-index:99}
+.bar{display:flex;align-items:center;gap:10px;margin:13px 0}
+.bar span{width:115px;font-size:12px;color:var(--muted)}
+.bar div{height:8px;background:var(--gold);border-radius:10px;flex:1}
+@media(max-width:950px){
+.sidebar{width:205px}.main{margin-left:205px;width:calc(100% - 205px)}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+.sidebar{display:none;z-index:20;width:245px}
+.sidebar.open{display:block}
+.main{margin-left:0;width:100%}
+.topbar{padding:0 15px}
+.menu-mobile{display:block}
+.content{padding:17px}
+.g2,.g3,.g4{grid-template-columns:1fr}
+.hero{padding:23px}
+h1{font-size:25px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+<div class="brand">CEO <span>MIND.</span></div>
+
+<div class="side-label">MAIN MENU</div>
+<button class="nav active" data-page="dashboard">🏠 Dashboard</button>
+<button class="nav" data-page="departments">🏢 Departments</button>
+<button class="nav" data-page="courses">📚 My Courses</button>
+<button class="nav" data-page="lessons">📖 Lessons</button>
+
+<div class="side-label">LEARNING</div>
+<button class="nav" data-page="quiz">📝 Quiz & Tests</button>
+<button class="nav" data-page="missions">🎯 Daily Missions</button>
+<button class="nav" data-page="progress">📈 Learning Progress</button>
+<button class="nav" data-page="achievements">🏆 Achievements</button>
+
+<div class="side-label">BUSINESS TOOLS</div>
+<button class="nav" data-page="simulator">🏭 Business Simulator</button>
+<button class="nav" data-page="mentor">🤖 AI Business Mentor</button>
+<button class="nav" data-page="finance">💰 Finance Lab</button>
+<button class="nav" data-page="decision">🧠 Decision Lab</button>
+<button class="nav" data-page="startup">🚀 Startup Studio</button>
+
+<div class="side-label">ACCOUNT</div>
+<button class="nav" data-page="profile">👤 My Profile</button>
+<button class="nav" data-page="settings">⚙️ Settings</button>
+<button class="nav" onclick="logout()">↪ Logout</button>
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+<div class="row">
+<button class="menu-mobile" onclick="toggleSidebar()">☰</button>
+<div><strong id="pageTitle">Dashboard</strong><br><small>CEO MIND Business Academy</small></div>
+</div>
+<div class="row">
+<span class="sub" id="topName">Guest</span>
+<div class="avatar" id="topAvatar">G</div>
+</div>
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+
+<section class="page active" id="dashboard">
+<div class="hero">
+<span class="tag">WELCOME TO CEO MIND</span>
+<h1>THINK LIKE A CEO.<br><span>BUILD YOUR FUTURE.</span></h1>
+<p>Learn business, develop leadership skills, explore entrepreneurship and build the mindset of a future business leader.</p>
+<button class="btn" onclick="go('departments')">Explore Academy →</button>
+</div>
+
+<div class="grid g4">
+<div class="card"><div class="icon">🏢</div><div class="stat-number">20</div><p class="sub">Business Departments</p></div>
+<div class="card"><div class="icon">📚</div><div class="stat-number" id="statCourses">0</div><p class="sub">Completed Courses</p></div>
+<div class="card"><div class="icon">🎯</div><div class="stat-number" id="statMissions">0</div><p class="sub">Completed Missions</p></div>
+<div class="card"><div class="icon">📈</div><div class="stat-number" id="statProgress">0%</div><p class="sub">Learning Progress</p></div>
+</div>
+
+<div class="section-title"><h2>Continue Learning</h2><button class="btn2" onclick="go('courses')">My Courses →</button></div>
+<div class="grid g2" id="continueCourses"></div>
+
+<div class="section-title"><h2>Explore Business Tools</h2></div>
+<div class="grid g3">
+<div class="card"><div class="icon">🤖</div><h3>AI Business Mentor</h3><p class="sub">Explore business questions.</p><button class="btn2" onclick="go('mentor')">Open Mentor</button></div>
+<div class="card"><div class="icon">💰</div><h3>Finance Lab</h3><p class="sub">Practice business calculations.</p><button class="btn2" onclick="go('finance')">Open Lab</button></div>
+<div class="card"><div class="icon">🚀</div><h3>Startup Studio</h3><p class="sub">Develop a startup concept.</p><button class="btn2" onclick="go('startup')">Open Studio</button></div>
+</div>
+</section>
+
+<!-- DEPARTMENTS -->
+
+<section class="page" id="departments">
+<h1>Business Academy</h1>
+<p class="sub">Explore all 20 business departments.</p>
+<input id="deptSearch" placeholder="Search departments..." oninput="renderDepartments()">
+<div class="grid g3" id="deptGrid" style="margin-top:20px"></div>
+</section>
+
+<!-- COURSE DETAILS -->
+
+<section class="page" id="courseDetail">
+<button class="btn2" onclick="go('departments')">← Back to Departments</button>
+<div class="section-title"><div><span class="tag" id="courseNumber">DEPARTMENT</span><h1 id="courseHeading" style="margin-top:12px"></h1><p class="sub" id="courseDescription"></p></div></div>
+<div class="grid g2">
+<div class="card"><h3>📖 Course Overview</h3><p class="sub" id="courseOverview"></p></div>
+<div class="card"><h3>🎯 Learning Goal</h3><p class="sub">Understand the concepts and apply your knowledge through lessons, quizzes and practical missions.</p></div>
+</div>
+<div class="section-title"><h2>Course Lessons</h2></div>
+<div class="card" id="courseLessons"></div>
+<button class="btn" onclick="startCourse()">Start Course →</button>
+</section>
+
+<!-- MY COURSES -->
+
+<section class="page" id="courses">
+<h1>My Courses</h1>
+<p class="sub">Your enrolled and completed courses.</p>
+<div class="grid g3" id="myCourses" style="margin-top:20px"></div>
+</section>
+
+<!-- LESSONS -->
+
+<section class="page" id="lessons">
+<h1>Business Lessons</h1>
+<p class="sub">Learn business concepts through simple structured lessons.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h3>Choose a Department</h3>
+<select id="lessonDept" onchange="loadLessons()"></select>
+<div id="lessonList"></div>
+</div>
+<div class="card">
+<span class="tag">LESSON CONTENT</span>
+<h2 id="lessonTitle" style="margin-top:15px">Select a Lesson</h2>
+<p class="sub" id="lessonContent">Choose a lesson from the left side to start learning.</p>
+<div id="lessonExample"></div>
+<button class="btn" id="completeLesson" onclick="completeCurrentLesson()" disabled>Mark Lesson Complete ✓</button>
+</div>
+</div>
+</section>
+
+<!-- QUIZ -->
+
+<section class="page" id="quiz">
+<h1>Quiz & Knowledge Tests</h1>
+<p class="sub">Test your understanding of business concepts.</p>
+<div class="card" style="margin-top:20px">
+<select id="quizDept" onchange="prepareQuiz()"></select>
+<div class="row"><h2 id="quizHeading">Business Knowledge Quiz</h2><span class="tag">5 QUESTIONS</span></div>
+<div id="quizQuestions"></div>
+<button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+<div id="quizResult"></div>
+</div>
+</section>
+
+<!-- MISSIONS -->
+
+<section class="page" id="missions">
+<h1>Daily Missions & Exercises</h1>
+<p class="sub">Practice business thinking with practical challenges.</p>
+<div class="grid g2" id="missionGrid" style="margin-top:20px"></div>
+</section>
+
+<!-- PROGRESS -->
+
+<section class="page" id="progress">
+<h1>Learning Progress</h1>
+<p class="sub">Your learning activity and course completion.</p>
+<div class="grid g3" style="margin-top:20px">
+<div class="card"><h3>Overall Progress</h3><div class="stat-number" id="overallProgress">0%</div><div class="progress"><div id="overallBar"></div></div></div>
+<div class="card"><h3>Lessons Completed</h3><div class="stat-number" id="lessonCount">0</div></div>
+<div class="card"><h3>Quiz Attempts</h3><div class="stat-number" id="quizCount">0</div></div>
+</div>
+<div class="section-title"><h2>Department Progress</h2></div>
+<div class="card" id="progressList"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+
+<section class="page" id="achievements">
+<h1>Achievements & Rewards</h1>
+<p class="sub">Milestones you can unlock through learning.</p>
+<div class="grid g3" id="badges" style="margin-top:20px"></div>
+</section>
+
+<!-- SIMULATOR -->
+
+<section class="page" id="simulator">
+<h1>Business Simulator</h1>
+<p class="sub">Practice making business decisions in a fictional business environment.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">SIMULATION ONLY</span>
+<h2 style="margin-top:15px">🏪 Mini Business Simulator</h2>
+<p class="sub">Manage a fictional shop and calculate its estimated monthly results.</p>
+<label>Monthly Sales (₹)</label><input type="number" id="simSales" value="50000">
+<label>Monthly Expenses (₹)</label><input type="number" id="simExpenses" value="30000">
+<label>Marketing Budget (₹)</label><input type="number" id="simMarketing" value="5000">
+<button class="btn" onclick="simulate()">Run Simulation</button>
+<div id="simResult" class="result hidden"></div>
+</div>
+</section>
+
+<!-- AI MENTOR -->
+
+<section class="page" id="mentor">
+<h1>AI Business Mentor</h1>
+<p class="sub">Business learning assistant interface.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">MENTOR DEMO</span>
+<h2 style="margin-top:15px">🤖 Ask Your Business Mentor</h2>
+<div id="chat" style="min-height:150px;max-height:350px;overflow:auto;background:#0c1423;padding:15px;border-radius:8px;margin:15px 0">
+<p class="sub">Mentor: Welcome! Ask me about business ideas, marketing, finance, startups or leadership.</p>
+</div>
+<textarea id="mentorQuestion" placeholder="Ask a business question..."></textarea>
+<button class="btn" onclick="askMentor()">Send Message →</button>
+<p class="sub" style="margin-top:12px">This is a demonstration interface with sample responses, not a connected live AI service.</p>
+</div>
+</section>
+
+<!-- FINANCE LAB -->
+
+<section class="page" id="finance">
+<h1>Finance Lab</h1>
+<p class="sub">Practice financial calculations using fictional business figures.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h2>💰 Profit Calculator</h2>
+<label>Total Revenue (₹)</label><input id="revenue" type="number" value="100000">
+<label>Total Costs (₹)</label><input id="costs" type="number" value="65000">
+<button class="btn" onclick="calculateProfit()">Calculate Profit</button>
+<div id="profitResult" class="result hidden"></div>
+</div>
+<div class="card">
+<h2>📊 Break-even Calculator</h2>
+<label>Fixed Costs (₹)</label><input id="fixed" type="number" value="20000">
+<label>Selling Price per Unit (₹)</label><input id="price" type="number" value="100">
+<label>Variable Cost per Unit (₹)</label><input id="variable" type="number" value="60">
+<button class="btn" onclick="calculateBreakEven()">Calculate Break-even</button>
+<div id="breakResult" class="result hidden"></div>
+</div>
+</div>
+</section>
+
+<!-- DECISION LAB -->
+
+<section class="page" id="decision">
+<h1>Decision Lab</h1>
+<p class="sub">Learn how to evaluate business decisions.</p>
+<div class="card" style="margin-top:20px">
+<span class="tag">BUSINESS SCENARIO</span>
+<h2 style="margin-top:15px">Your business has a limited marketing budget.</h2>
+<p class="sub">You have ₹10,000 to invest. What would you do first?</p>
+<div id="decisionOptions">
+<label class="option"><input type="radio" name="decision" value="research"> Research your target customers first.</label>
+<label class="option"><input type="radio" name="decision" value="ads"> Spend everything on advertisements immediately.</label>
+<label class="option"><input type="radio" name="decision" value="random"> Spend without planning.</label>
+</div>
+<button class="btn" onclick="checkDecision()">Evaluate Decision</button>
+<div id="decisionResult" class="result hidden"></div>
+</div>
+</section>
+
+<!-- STARTUP STUDIO -->
+
+<section class="page" id="startup">
+<h1>Startup Studio</h1>
+<p class="sub">Create and organize your startup concept.</p>
+<div class="grid g2" style="margin-top:20px">
+<div class="card">
+<h2>🚀 Startup Idea Builder</h2>
+<label>Startup Name</label><input id="startupName" placeholder="Enter startup name">
+<label>Problem You Want to Solve</label><textarea id="startupProblem" placeholder="Describe the problem..."></textarea>
+<label>Your Solution</label><textarea id="startupSolution" placeholder="Describe your solution..."></textarea>
+<label>Target Customers</label><input id="startupCustomers" placeholder="Who are your customers?">
+<label>Business Model</label>
+<select id="startupModel"><option>Subscription</option><option>Product Sales</option><option>Service Business</option><option>Freemium</option><option>Marketplace</option></select>
+<button class="btn" onclick="saveStartup()">Save Startup Concept</button>
+</div>
+<div class="card">
+<h2>📋 Your Startup Plan</h2>
+<div id="startupOutput"><p class="sub">Your saved startup concept will appear here.</p></div>
+</div>
+</div>
+</section>
+
+<!-- PROFILE -->
+
+<section class="page" id="profile">
+<h1>My Profile</h1>
+<p class="sub">Manage your learning identity.</p>
+<div class="card" style="max-width:600px;margin-top:20px">
+<div class="avatar" style="display:inline-block;font-size:25px" id="profileAvatar">G</div>
+<h2 id="profileName" style="margin-top:15px">Guest User</h2>
+<p class="sub" id="profileEmail"></p>
+<label>Full Name</label><input id="editName">
+<label>Email</label><input id="editEmail">
+<button class="btn" onclick="saveProfile()">Save Profile</button>
+</div>
+</section>
+
+<!-- SETTINGS -->
+
+<section class="page" id="settings">
+<h1>Settings</h1>
+<p class="sub">Manage your demo account preferences.</p>
+<div class="card" style="max-width:600px;margin-top:20px">
+<h3>Account</h3>
+<p class="sub">CEO MIND browser-based demonstration account.</p>
+<button class="btn2" onclick="exportData()">Export My Learning Data</button>
+<button class="btn2 btn-danger" onclick="resetData()">Reset Learning Data</button>
+</div>
+</section>
+
+<footer>CEO MIND © 2026 | LEARN BUSINESS. THINK BIG. BUILD THE FUTURE.</footer>
+
+</div>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN MODAL -->
+
+<div id="authModal" style="display:none;position:fixed;inset:0;background:#050a14;z-index:100;align-items:center;justify-content:center;padding:20px">
+<div class="card" style="max-width:400px;width:100%">
+<div class="brand" style="padding-left:0">CEO <span>MIND.</span></div>
+<h2 id="authHeading">Welcome Back</h2>
+<p class="sub">Access your business learning dashboard.</p>
+<div id="authNameWrap" class="hidden"><label>Full Name</label><input id="authName" placeholder="Your name"></div>
+<label>Email</label><input id="authEmail" type="email" placeholder="Email address">
+<label>Password</label><input id="authPassword" type="password" placeholder="Password">
+<button class="btn" style="width:100%" onclick="authenticate()">Continue →</button>
+<button class="btn2" style="width:100%" onclick="toggleAuth()">Switch Login / Signup</button>
+<button class="btn2" style="width:100%" onclick="guestLogin()">Explore Demo as Guest</button>
+<p class="sub" style="margin-top:15px">Demo authentication only. Do not enter a real password.</p>
+</div>
+</div>
+
+<script>
+
+/* CEO MIND APPLICATION DATA */
+
+const departments=[
+["Business Fundamentals","📘","Learn business foundations and core concepts."],
+["Business Ideas","💡","Discover and develop business opportunities."],
+["Market Research","🔍","Understand customers, competitors and markets."],
+["Business Planning","📝","Create structured business plans."],
+["Startup Building","🚀","Learn how to build a startup."],
+["Marketing","📢","Understand marketing and promotion."],
+["Sales","🤝","Learn customer relationships and selling."],
+["Branding","🎨","Build a memorable business identity."],
+["Finance","💰","Understand financial management."],
+["Accounting","🧮","Learn accounts and financial records."],
+["Management","⚙️","Manage teams and business operations."],
+["Leadership","👑","Develop leadership skills."],
+["Communication","🗣️","Improve professional communication."],
+["Negotiation","🤝","Learn negotiation techniques."],
+["Entrepreneurship","🌍","Develop entrepreneurial thinking."],
+["Technology in Business","💻","Explore modern business technology."],
+["AI in Business","🤖","Understand AI applications in business."],
+["E-commerce","🛒","Learn online business fundamentals."],
+["Business Law","⚖️","Understand basic business legal concepts."],
+["Business Growth and Scaling","📈","Learn how businesses expand."]
+];
+
+const lessonTopics=[
+"Introduction and Basic Concepts",
+"Important Principles",
+"Real-World Business Example",
+"Planning and Strategy",
+"Practical Application"
+];
+
+const lessonTexts=[
+"Understand what this topic means and why it matters in business. Learn the basic vocabulary and identify its role in a company.",
+"Explore the important principles behind this topic. Think about how a business can use these principles to solve problems and create value.",
+"Imagine a small business facing a real customer problem. Study how the business can apply this topic to make a better decision.",
+"Create a simple plan. Identify your goal, available resources, possible challenges and the next steps.",
+"Apply what you have learned to a fictional business situation. Write down your approach and explain why it makes sense."
+];
+
+const quizQuestions=[
+["What is the main purpose of a business?",["Create customer value","Avoid customers","Spend without planning"],0],
+["What should come before launching a product?",["Ignore the market","Understand customer needs","Copy everything"],1],
+["What is revenue?",["Business income from sales","Only business expenses","A company logo"],0],
+["What does marketing help a business do?",["Hide its product","Reach potential customers","Remove all costs"],1],
+["What is a business plan?",["A structured business roadmap","A random idea","A product advertisement"],0]
+];
+
+const missions=[
+["Identify a Problem","Find one everyday problem that a business could solve."],
+["Create a Business Idea","Develop a simple idea that solves a customer problem."],
+["Understand Customers","Describe the target customers of your idea."],
+["Competitor Research","Identify two fictional competitors and compare their offers."],
+["Build an Offer","Create a product or service offer."],
+["Create a Brand","Choose a business name and write a tagline."],
+["Marketing Strategy","Write three ways to introduce a product to customers."],
+["Sales Practice","Explain how you would communicate product value."],
+["Finance Practice","Calculate estimated revenue and expenses."],
+["Leadership Challenge","Describe how you would organize a small team."]
+];
+
+/* LOCAL DEMO STORAGE */
+
+function getData(){
+try{return JSON.parse(localStorage.getItem("ceomind_data"))||{}}
+catch(e){return {}}
+}
+let data=getData();
+
+function saveData(){
+localStorage.setItem("ceomind_data",JSON.stringify(data));
+updateDashboard();
+}
+
+function defaults(){
+data.lessons=data.lessons||[];
+data.missions=data.missions||[];
+data.completed=data.completed||[];
+data.quizzes=data.quizzes||[];
+data.profile=data.profile||{name:"Guest User",email:""};
+data.startup=data.startup||null;
+}
+defaults();
+
+/* NAVIGATION */
+
+function go(page){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+const target=document.getElementById(page);
+if(!target)return;
+target.classList.add("active");
+document.querySelectorAll(".nav").forEach(n=>n.classList.toggle("active",n.dataset.page===page));
+document.getElementById("pageTitle").textContent=page==="courseDetail"?"Course Details":page.charAt(0).toUpperCase()+page.slice(1);
+document.getElementById("sidebar").classList.remove("open");
+if(page==="progress")renderProgress();
+if(page==="achievements")renderBadges();
+if(page==="courses")renderMyCourses();
+window.scrollTo(0,0);
+}
+
+document.querySelectorAll(".nav[data-page]").forEach(n=>{
+n.addEventListener("click",()=>go(n.dataset.page));
+});
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("open");
+}
+
+function notify(msg){
+const t=document.getElementById("toast");
+t.textContent=msg;t.style.display="block";
+setTimeout(()=>t.style.display="none",2500);
+}
+
+/* AUTHENTICATION DEMO */
+
+let signupMode=false;
+
+function toggleAuth(){
+signupMode=!signupMode;
+document.getElementById("authHeading").textContent=signupMode?"Create Account":"Welcome Back";
+document.getElementById("authNameWrap").classList.toggle("hidden",!signupMode);
+}
+
+function guestLogin(){
+data.profile={name:"Guest User",email:""};
+saveData();
+document.getElementById("authModal").style.display="none";
+refreshProfile();
+}
+
+function authenticate(){
+const email=document.getElementById("authEmail").value.trim();
+const password=document.getElementById("authPassword").value;
+const name=document.getElementById("authName").value.trim();
+
+if(!email||!password){notify("Enter email and password");return}
+if(signupMode&&!name){notify("Enter your name");return}
+
+data.profile={name:signupMode?name:(data.profile.name||email.split("@")[0]),email:email};
+saveData();
+document.getElementById("authModal").style.display="none";
+refreshProfile();
+notify("Demo account opened!");
+}
+
+function logout(){
+document.getElementById("authModal").style.display="flex";
+}
+
+function refreshProfile(){
+const p=data.profile;
+document.getElementById("topName").textContent=p.name;
+document.getElementById("topAvatar").textContent=p.name.charAt(0).toUpperCase();
+document.getElementById("profileAvatar").textContent=p.name.charAt(0).toUpperCase();
+document.getElementById("profileName").textContent=p.name;
+document.getElementById("profileEmail").textContent=p.email||"Guest account";
+document.getElementById("editName").value=p.name;
+document.getElementById("editEmail").value=p.email;
+}
+
+/* DEPARTMENTS */
+
+function renderDepartments(){
+const q=(document.getElementById("deptSearch")?.value||"").toLowerCase();
+const grid=document.getElementById("deptGrid");
+grid.innerHTML="";
+departments.forEach((d,i)=>{
+if(!d[0].toLowerCase().includes(q))return;
+const el=document.createElement("div");
+el.className="card dept-card";
+el.innerHTML=`<span class="tag">DEPARTMENT ${String(i+1).padStart(2,"0")}</span>
+<div class="icon" style="margin-top:15px">${d[1]}</div>
+<h3>${d[0]}</h3><p>${d[2]}</p><button class="btn2">Explore Course →</button>`;
+el.onclick=()=>openDepartment(i);
+grid.appendChild(el);
+});
+}
+
+let currentDept=0,currentLesson=0;
+
+function openDepartment(i){
+currentDept=i;
+const d=departments[i];
+document.getElementById("courseNumber").textContent="DEPARTMENT "+String(i+1).padStart(2,"0");
+document.getElementById("courseHeading").textContent=d[0];
+document.getElementById("courseDescription").textContent=d[2];
+document.getElementById("courseOverview").textContent="This course introduces "+d[0]+". You will explore five learning topics, review examples and complete practical activities.";
+const list=document.getElementById("courseLessons");
+list.innerHTML=lessonTopics.map((t,j)=>`<div class="lesson" onclick="selectLesson(${i},${j})">${j+1}. ${t}</div>`).join("");
+go("courseDetail");
+}
+
+function startCourse(){
+selectLesson(currentDept,0);
+go("lessons");
+}
+
+function initSelects(){
+["lessonDept","quizDept"].forEach(id=>{
+const s=document.getElementById(id);
+s.innerHTML=departments.map((d,i)=>`<option value="${i}">${d[0]}</option>`).join("");
+});
+}
+
+/* LESSON SYSTEM */
+
+function loadLessons(){
+currentDept=Number(document.getElementById("lessonDept").value);
+const list=document.getElementById("lessonList");
+list.innerHTML=lessonTopics.map((t,i)=>{
+const done=data.lessons.includes(currentDept+"-"+i);
+return `<div class="lesson ${done?"done":""}" onclick="selectLesson(${currentDept},${i})">
+${done?"✓":"📖"} ${i+1}. ${t}</div>`;
+}).join("");
+}
+
+function selectLesson(dept,index){
+currentDept=dept;currentLesson=index;
+document.getElementById("lessonDept").value=dept;
+loadLessons();
+document.getElementById("lessonTitle").textContent=departments[dept][0]+" — "+lessonTopics[index];
+document.getElementById("lessonContent").textContent=lessonTexts[index];
+document.getElementById("lessonExample").innerHTML="<br><div class='tag'>PRACTICAL EXAMPLE</div><p class='sub' style='margin-top:10px'>Imagine a small business applying "+departments[dept][0].toLowerCase()+" to improve its work and serve customers better. Think about the steps it could take.</p>";
+document.getElementById("completeLesson").disabled=data.lessons.includes(dept+"-"+index);
+}
+
+function completeCurrentLesson(){
+const key=currentDept+"-"+currentLesson;
+if(!data.lessons.includes(key))data.lessons.push(key);
+saveData();loadLessons();
+document.getElementById("completeLesson").disabled=true;
+notify("Lesson marked complete!");
+}
+
+/* QUIZ SYSTEM */
+
+function prepareQuiz(){
+const i=Number(document.getElementById("quizDept").value);
+document.getElementById("quizHeading").textContent=departments[i][0]+" Quiz";
+document.getElementById("quizQuestions").innerHTML=quizQuestions.map((q,j)=>`
+<div style="margin:20px 0">
+<strong>${j+1}. ${q[0]}</strong>
+${q[1].map((a,k)=>`<label class="option"><input type="radio" name="q${j}" value="${k}">${a}</label>`).join("")}
+</div>`).join("");
+document.getElementById("quizResult").innerHTML="";
+}
+
+function submitQuiz(){
+let score=0,answered=0;
+quizQuestions.forEach((q,i)=>{
+const a=document.querySelector(`input[name="q${i}"]:checked`);
+if(a){answered++;if(Number(a.value)===q[2])score++}
+});
+if(answered<5){notify("Answer all five questions first");return}
+data.quizzes.push({dept:Number(document.getElementById("quizDept").value),score:score,date:new Date().toLocaleDateString()});
+saveData();
+document.getElementById("quizResult").innerHTML=`<div class="result">Your score: ${score}/5 (${score*20}%). ${score>=3?"Good work!":"Keep learning and try again."}</div>`;
+}
+
+/* MISSIONS */
+
+function renderMissions(){
+document.getElementById("missionGrid").innerHTML=missions.map((m,i)=>{
+const done=data.missions.includes(i);
+return `<div class="card">
+<span class="tag">MISSION ${String(i+1).padStart(2,"0")}</span>
+<h3 style="margin-top:15px">${m[0]}</h3>
+<p class="sub">${m[1]}</p>
+<label>Your Answer / Notes</label>
+<textarea id="missionAnswer${i}" placeholder="Write your answer here..." ${done?"disabled":""}></textarea>
+<button class="btn ${done?"btn2":""}" onclick="completeMission(${i})" ${done?"disabled":""}>${done?"✓ Completed":"Submit Mission"}</button>
+</div>`;
+}).join("");
+}
+
+function completeMission(i){
+const answer=document.getElementById("missionAnswer"+i).value.trim();
+if(!answer){notify("Write your answer first");return}
+data.missions.push(i);
+data["missionAnswer"+i]=answer;
+saveData();renderMissions();notify("Mission completed!");
+}
+
+/* PROGRESS */
+
+function getProgress(){
+return Math.round(((data.lessons.length)/(departments.length*lessonTopics.length))*100);
+}
+
+function updateDashboard(){
+document.getElementById("statCourses").textContent=data.completed.length;
+document.getElementById("statMissions").textContent=data.missions.length;
+document.getElementById("statProgress").textContent=getProgress()+"%";
+document.getElementById("continueCourses").innerHTML=departments.slice(0,4).map((d,i)=>{
+const count=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="card"><h3>${d[1]} ${d[0]}</h3><p class="sub">${count}/5 lessons completed</p><div class="progress"><div style="width:${count*20}%"></div></div><button class="btn2" onclick="openDepartment(${i})">Continue →</button></div>`;
+}).join("");
+}
+
+function renderMyCourses(){
+document.getElementById("myCourses").innerHTML=departments.map((d,i)=>{
+const count=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="card"><h3>${d[1]} ${d[0]}</h3><p class="sub">${count}/5 lessons completed</p><div class="progress"><div style="width:${count*20}%"></div></div><button class="btn2" onclick="openDepartment(${i})">Open Course →</button></div>`;
+}).join("");
+}
+
+function renderProgress(){
+const progress=getProgress();
+document.getElementById("overallProgress").textContent=progress+"%";
+document.getElementById("overallBar").style.width=progress+"%";
+document.getElementById("lessonCount").textContent=data.lessons.length;
+document.getElementById("quizCount").textContent=data.quizzes.length;
+document.getElementById("progressList").innerHTML=departments.map((d,i)=>{
+const n=lessonTopics.filter((t,j)=>data.lessons.includes(i+"-"+j)).length;
+return `<div class="bar"><span>${d[0]}</span><div style="max-width:${Math.max(n*20,1)}%;width:${n*20}%"></div><small>${n}/5</small></div>`;
+}).join("");
+}
+
+/* ACHIEVEMENTS */
+
+function renderBadges(){
+const items=[
+["🌱","First Steps",data.lessons.length>=1,"Complete your first lesson."],
+["📚","Knowledge Seeker",data.lessons.length>=5,"Complete five lessons."],
+["🎯","Mission Starter",data.missions.length>=1,"Complete a mission."],
+["🏅","Mission Master",data.missions.length>=5,"Complete five missions."],
+["🧠","Quiz Explorer",data.quizzes.length>=1,"Attempt a knowledge quiz."],
+["👑","Future CEO",getProgress()===100,"Complete all 100 lessons."]
+];
+document.getElementById("badges").innerHTML=items.map(b=>`<div class="card"><div class="icon">${b[0]}</div><h3>${b[1]} ${b[2]?"✓":"🔒"}</h3><p class="sub">${b[3]}</p><span class="tag">${b[2]?"UNLOCKED":"LOCKED"}</span></div>`).join("");
+}
+
+/* BUSINESS SIMULATOR */
+
+function simulate(){
+const s=Number(document.getElementById("simSales").value);
+const e=Number(document.getElementById("simExpenses").value);
+const m=Number(document.getElementById("simMarketing").value);
+const profit=s-e-m;
+const r=document.getElementById("simResult");
+r.classList.remove("hidden");
+r.innerHTML=`Estimated monthly result: <strong>₹${profit.toLocaleString("en-IN")}</strong><br>${profit>=0?"The fictional business has a positive result.":"The fictional business has a negative result."}<br><small>This is a simplified educational simulation.</small>`;
+}
+
+/* AI MENTOR DEMO */
+
+function askMentor(){
+const q=document.getElementById("mentorQuestion").value.trim();
+if(!q)return;
+const chat=document.getElementById("chat");
+const user=document.createElement("p");
+user.style.margin="12px 0";
+user.textContent="You: "+q;
+chat.appendChild(user);
+const lower=q.toLowerCase();
+let answer="Start by understanding the problem, your customers and the value your business can provide. Create a simple plan and test your idea with feedback.";
+if(lower.includes("market"))answer="Market research helps you understand customer needs, competitors and demand. Start by identifying your target audience and asking what problems they face.";
+else if(lower.includes("profit")||lower.includes("finance"))answer="Profit is calculated by subtracting total costs from total revenue. Track expenses carefully and understand your cash flow.";
+else if(lower.includes("startup")||lower.includes("idea"))answer="A startup begins with a problem worth solving. Identify customers, create a simple solution, test demand and improve using feedback.";
+else if(lower.includes("marketing"))answer="Marketing is about reaching the right customers with the right message. Understand your audience, communicate your value and measure results.";
+else if(lower.includes("leadership"))answer="Good leadership involves communication, responsibility, clear goals and helping a team work together.";
+const reply=document.createElement("p");
+reply.style.cssText="padding:13px;background:#202d43;border-radius:8px;margin:12px 0;color:#e9d09a";
+reply.textContent="Mentor Demo: "+answer;
+chat.appendChild(reply);
+document.getElementById("mentorQuestion").value="";
+chat.scrollTop=chat.scrollHeight;
+}
+
+/* FINANCE LAB */
+
+function calculateProfit(){
+const r=Number(document.getElementById("revenue").value);
+const c=Number(document.getElementById("costs").value);
+const el=document.getElementById("profitResult");
+el.classList.remove("hidden");
+el.innerHTML=`Revenue: ₹${r.toLocaleString("en-IN")}<br>Costs: ₹${c.toLocaleString("en-IN")}<br><strong>Profit / Loss: ₹${(r-c).toLocaleString("en-IN")}</strong>`;
+}
+
+function calculateBreakEven(){
+const f=Number(document.getElementById("fixed").value);
+const p=Number(document.getElementById("price").value);
+const v=Number(document.getElementById("variable").value);
+const el=document.getElementById("breakResult");
+el.classList.remove("hidden");
+if(p<=v){el.textContent="Selling price must be greater than variable cost.";return}
+el.innerHTML=`Contribution per unit: ₹${p-v}<br><strong>Break-even units: ${Math.ceil(f/(p-v))}</strong>`;
+}
+
+/* DECISION LAB */
+
+function checkDecision(){
+const choice=document.querySelector('input[name="decision"]:checked');
+if(!choice){notify("Select an option");return}
+const el=document.getElementById("decisionResult");
+el.classList.remove("hidden");
+el.textContent=choice.value==="research"?"Excellent choice! Understanding customers before spending helps businesses make informed marketing decisions.":"Think again. A business should understand its customers and objectives before spending its marketing budget.";
+}
+
+/* STARTUP STUDIO */
+
+function saveStartup(){
+const name=document.getElementById("startupName").value.trim();
+const problem=document.getElementById("startupProblem").value.trim();
+const solution=document.getElementById("startupSolution").value.trim();
+const customers=document.getElementById("startupCustomers").value.trim();
+const model=document.getElementById("startupModel").value;
+if(!name||!problem||!solution||!customers){notify("Complete all startup fields");return}
+data.startup={name,problem,solution,customers,model};
+saveData();renderStartup();notify("Startup concept saved!");
+}
+
+function renderStartup(){
+const s=data.startup;
+if(!s)return;
+document.getElementById("startupOutput").innerHTML=`
+<h2 class="gold">${escapeHTML(s.name)}</h2>
+<p class="sub"><strong>Problem:</strong> ${escapeHTML(s.problem)}</p><br>
+<p class="sub"><strong>Solution:</strong> ${escapeHTML(s.solution)}</p><br>
+<p class="sub"><strong>Customers:</strong> ${escapeHTML(s.customers)}</p><br>
+<p class="sub"><strong>Model:</strong> ${escapeHTML(s.model)}</p>`;
+}
+
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* PROFILE AND SETTINGS */
+
+function saveProfile(){
+data.profile.name=document.getElementById("editName").value.trim()||"Guest User";
+data.profile.email=document.getElementById("editEmail").value.trim();
+saveData();refreshProfile();notify("Profile updated!");
+}
+
+function exportData(){
+const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="CEO-MIND-Learning-Data.json";
+a.click();URL.revokeObjectURL(a.href);
+}
+
+function resetData(){
+if(!confirm("Reset all locally saved learning data?"))return;
+localStorage.removeItem("ceomind_data");
+data={};defaults();saveData();
+refreshProfile();renderMissions();renderStartup();renderBadges();
+notify("Demo learning data reset");
+}
+
+/* INITIALIZE */
+
+renderDepartments();
+initSelects();
+loadLessons();
+prepareQuiz();
+renderMissions();
+refreshProfile();
+updateDashboard();
+renderStartup();
+
+</script>
+</body>
+</html>
